@@ -36,7 +36,16 @@ ALTER TABLE desglose_ticket
 	ADD CONSTRAINT fk_desglose_ticket_producto
 		FOREIGN KEY (id_producto) REFERENCES producto(id_producto);
 
--- TRIGGER que completa el INSERT de la tabla desglose_ticket con el precio actual del producto y el total de la línea.
+
+ALTER TABLE impuesto_ticket
+	ADD CONSTRAINT fk_impuesto_ticket_ticket
+		FOREIGN KEY(id_ticket) REFERENCES ticket(id_ticket),
+	ADD CONSTRAINT fk_impuesto_ticket_impuesto
+		FOREIGN KEY (id_impuesto) REFERENCES impuesto(id_impuesto);
+
+
+-- TRIGGER que completa el INSERT de la tabla desglose_ticket 
+-- con el precio actual del producto y el total de la línea.
 DELIMITER // 
 CREATE TRIGGER desglose_ticket_autocompleta_precio_total
 BEFORE INSERT ON desglose_ticket
@@ -48,5 +57,3 @@ BEGIN
     SET NEW.precio_total = (NEW.cantidad * NEW.precio_linea);
 END//
 DELIMITER ;
-
-

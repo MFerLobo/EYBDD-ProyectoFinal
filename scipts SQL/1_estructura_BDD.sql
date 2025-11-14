@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS restaurante;
 CREATE DATABASE IF NOT EXISTS restaurante;
 USE restaurante;
 
@@ -5,6 +6,14 @@ USE restaurante;
 -- *************************************************************************************
 -- ******************************** CREACIÓN DE TABLAS *********************************
 -- *************************************************************************************
+
+CREATE TABLE impuesto (
+	id_impuesto INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(20) NOT NULL,
+    tasa FLOAT NOT NULL,
+    PRIMARY KEY (id_impuesto)
+);
+
 
 CREATE TABLE mesa ( 
 	id_mesa INT NOT NULL AUTO_INCREMENT,
@@ -22,7 +31,7 @@ CREATE TABLE domicilio (
 
 CREATE TABLE producto (
 	id_producto INT NOT NULL AUTO_INCREMENT,
-	nombre VARCHAR(40) NOT NULL,
+	descripcion VARCHAR(40) NOT NULL,
     precio FLOAT NOT NULL CHECK(precio > 0),
     stock INT NOT NULL CHECK(stock >= 0),
     PRIMARY KEY(id_producto)
@@ -71,4 +80,9 @@ CREATE TABLE desglose_ticket (
     cantidad INT NOT NULL CHECK(cantidad > 0),
     precio_linea FLOAT CHECK(precio_linea > 0),
     precio_total FLOAT CHECK(precio_total > 0)
+);
+
+CREATE TABLE impuesto_ticket (
+	id_ticket INT NOT NULL,
+    id_impuesto INT NOT NULL
 );
