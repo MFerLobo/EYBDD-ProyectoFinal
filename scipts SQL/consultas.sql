@@ -2,7 +2,8 @@
 -- ************************************* CONSULTAS *************************************
 -- *************************************************************************************
 
--- Muestra los productos que fueron ordenados durante el mes (actual o reemplazar MONTH(NOW()) por número de mes a consultar), ordenados de mayor a menor.
+-- Muestra los productos que fueron ordenados durante el mes (actual o reemplazar MONTH(NOW()) 
+-- por número de mes a consultar), ordenados de mayor a menor.
 SELECT 
 	producto.descripcion,
     SUM(detalle_pedido.cantidad) AS 'Productos pedidos en el mes'
